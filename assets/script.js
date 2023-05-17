@@ -20,7 +20,6 @@ const slides = [
   },
 ];
 
-const banner = document.getElementById("banner");
 const bannerImg = document.querySelector(".banner-img");
 const tagLine = document.querySelector("#banner p");
 const arrowRight = document.querySelector(".arrow_right");
@@ -29,16 +28,22 @@ const dot = document.querySelectorAll(".dot");
 
 const DOT_FILLED = "dot_selected";
 
-// le bullet point actif au suivant
 let clicks = 0;
 
-function rightControler() {
+function slideControler(direction) {
   dot[clicks].classList.remove(DOT_FILLED);
-  if (clicks < dot.length - 1) {
-    clicks += 1;
+  if (direction === "left") {
+    if (clicks > 0) {
+      clicks -= 1;
+    } else {
+      clicks = dot.length - 1;
+    }
   } else {
-    clicks = dot.length - 1;
-    clicks = 0;
+    if (clicks < dot.length - 1) {
+      clicks += 1;
+    } else {
+      clicks = 0;
+    }
   }
   const chosenImg = slides[clicks].image;
   bannerImg.src = `./assets/images/slideshow/${chosenImg}`;
@@ -47,21 +52,5 @@ function rightControler() {
   dot[clicks].classList.add(DOT_FILLED);
 }
 
-// le bullet point actif au précédent
-function leftControler() {
-  dot[clicks].classList.remove(DOT_FILLED);
-  if (clicks > 0) {
-    clicks -= 1;
-  } else {
-    clicks = 0;
-    clicks = dot.length - 1;
-  }
-  const chosenImg = slides[clicks].image;
-  bannerImg.src = `./assets/images/slideshow/${chosenImg}`;
-  const chosenTxt = slides[clicks].tagLine;
-  tagLine.innerHTML = chosenTxt;
-  dot[clicks].classList.add(DOT_FILLED);
-}
-
-arrowRight.addEventListener("click", rightControler);
-arrowLeft.addEventListener("click", leftControler);
+arrowRight.addEventListener("click", () => slideControler("right"));
+arrowLeft.addEventListener("click", () => slideControler("left"));
