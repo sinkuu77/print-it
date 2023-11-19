@@ -1,4 +1,4 @@
-# Print-it(un site “mobile first” qui répertorie les menus de restaurants gastronomiques)
+# Print-it(le site Internet statique d’une petite imprimerie familiale)
 
 Projet 5 - Premiers pas sur le langage JavaScript (OpenClassrooms)
 
